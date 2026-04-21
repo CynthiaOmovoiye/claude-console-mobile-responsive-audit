@@ -14,8 +14,8 @@ export function MobileDrawer({ open, onOpenChange, activePage, onNavigate }: Mob
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-40 bg-black/50 md:hidden" />
-        <Dialog.Content className="fixed inset-y-0 left-0 z-50 flex w-[min(100vw,18rem)] flex-col border-r border-[var(--border)] bg-[var(--bg)] p-4 shadow-lg outline-none md:hidden">
+        <Dialog.Overlay className="mobile-drawer-overlay fixed inset-0 z-40 bg-black/50 md:hidden" />
+        <Dialog.Content className="mobile-drawer-panel fixed inset-y-0 left-0 z-50 flex w-[min(100vw,18rem)] flex-col border-r border-[var(--border)] bg-[var(--bg)] p-4 shadow-lg outline-none md:hidden">
           <div className="mb-4 flex items-center justify-between gap-2">
             <Dialog.Title className="text-left text-base font-medium text-[var(--text-h)]">Menu</Dialog.Title>
             <Dialog.Close asChild>

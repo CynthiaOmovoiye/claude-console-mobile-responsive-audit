@@ -1,38 +1,83 @@
 import clsx from 'clsx'
+import { PanelLeft, PanelLeftClose } from 'lucide-react'
 import { navItems, type PageId } from '../data/navItems'
 
 type SidebarProps = {
   activePage: PageId
   onNavigate: (id: PageId) => void
+  expanded: boolean
+  onToggleExpanded: () => void
 }
 
-export function Sidebar({ activePage, onNavigate }: SidebarProps) {
+export function Sidebar({ activePage, onNavigate, expanded, onToggleExpanded }: SidebarProps) {
   return (
-    <aside className="hidden w-60 shrink-0 flex-col border-r border-[var(--border)] bg-[var(--bg)] p-3 md:flex">
-      <p className="px-2 pb-3 text-left text-xs font-medium uppercase tracking-wide text-[var(--text)]">
-        Console
-      </p>
-      <nav className="flex flex-col gap-1" aria-label="Primary">
-        {navItems.map(({ id, label, icon: Icon }) => {
-          const active = id === activePage
-          return (
+    <aside
+      className={clsx(
+        'hidden shrink-0 flex-col border-r border-[var(--border)] transition-[width,padding,background-color] duration-300 ease-out md:flex',
+        expanded
+          ? 'w-60 bg-[var(--bg)] p-3'
+          : 'w-14 bg-[var(--code-bg)] p-2',
+      )}
+    >
+      <div className="flex min-h-0 flex-1 flex-col gap-2">
+        {expanded ? (
+          <div className="flex items-center justify-between gap-2 pb-1">
+            <p className="min-w-0 px-1 text-left text-xs font-medium uppercase tracking-wide text-[var(--text)]">Console</p>
             <button
-              key={id}
               type="button"
-              onClick={() => onNavigate(id)}
-              className={clsx(
-                'flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-colors',
-                active
-                  ? 'bg-[var(--accent-bg)] text-[var(--text-h)]'
-                  : 'text-[var(--text)] hover:bg-[var(--code-bg)] hover:text-[var(--text-h)]',
-              )}
+              onClick={onToggleExpanded}
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--bg)] text-[var(--text-h)] hover:bg-[var(--code-bg)]"
+              aria-label="Collapse sidebar"
+              aria-expanded={true}
             >
-              <Icon className="size-4 shrink-0" aria-hidden />
-              {label}
+              <PanelLeftClose className="size-4 shrink-0" aria-hidden />
             </button>
-          )
-        })}
-      </nav>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={onToggleExpanded}
+            className="inline-flex size-10 shrink-0 items-center justify-center self-center rounded-md border border-[var(--border)] bg-[var(--bg)] text-[var(--text-h)] hover:opacity-90"
+            aria-label="Expand sidebar"
+            aria-expanded={false}
+          >
+            <PanelLeft className="size-4 shrink-0" aria-hidden />
+          </button>
+        )}
+
+        <nav
+          className={clsx(
+            'flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto',
+            expanded ? 'items-stretch' : 'items-center',
+          )}
+          aria-label="Primary"
+        >
+          {navItems.map(({ id, label, icon: Icon }) => {
+            const active = id === activePage
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => onNavigate(id)}
+                title={expanded ? undefined : label}
+                aria-label={label}
+                className={clsx(
+                  'flex shrink-0 items-center rounded-md text-sm transition-colors',
+                  expanded
+                    ? 'w-full gap-2 px-2 py-2 text-left'
+                    : 'size-10 justify-center text-[var(--text-h)]',
+                  active
+                    ? 'bg-[var(--accent-bg)] text-[var(--text-h)]'
+                    : 'text-[var(--text)] hover:bg-[var(--bg)] hover:text-[var(--text-h)]',
+                )}
+              >
+                <Icon className="size-4 shrink-0" aria-hidden />
+                {expanded ? <span className="min-w-0 truncate">{label}</span> : null}
+              </button>
+            )
+          })}
+        </nav>
+      </div>
     </aside>
   )
 }
