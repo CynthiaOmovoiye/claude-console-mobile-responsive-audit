@@ -35,7 +35,7 @@ This case study intentionally focuses on the Quickstart workflow because it alre
 - sticky mobile actions
 - mobile information architecture
 
-The prototype does not include Workbench, Files, Analytics, or a real backend/API. The scope is intentionally narrow so the Quickstart interaction model can be explored in more depth.
+The prototype does not include other pages available on the Official Claude Console platform or a real backend/API. The scope is intentionally narrow so the Quickstart interaction model can be explored in more depth.
 
 ## Problem Framing
 
