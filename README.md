@@ -92,12 +92,43 @@ npm run build
 
 ## Screenshots
 
-Coming soon.
+
+### 1. Before — Quickstart split (Create agent)
+
+*Desktop: prompt / “describe” column and **Browse templates** + search + cards in one view.*
+
+![Desktop Quickstart split layout](./docs/screenshots/Before_Sidebar_collapsed.png)
+
+### 2. Mobile — overlay navigation drawer
+
+*Mobile: **Menu** opened; drawer overlays content (full-width main column preserved behind it).*
+
+![Mobile navigation drawer open](./docs/screenshots/After_agent_sidebar_drawer.png)
+
+### 3. Mobile — Describe / Templates segments
+
+*Mobile: **Create agent** step with **Describe** vs **Templates** segmentation (not side-by-side columns).*
+
+![Mobile Describe and Templates segments](./docs/screenshots/After_templates.png)
+
+### 4. Mobile — template detail and code preview
+
+*Mobile: template title/description, **Describe / Preview** (or code) area, YAML/JSON preview, **Use this template** sticky action if visible.*
+
+![Mobile template detail and code preview](./docs/screenshots/After_template_details.png)
+
+### 5. Mobile — agent created (Call / Config / Preview)
+
+*Mobile: **Agent created** success, description, and **Call / Config / Preview** tabs (API snippet or config visible).*
+
+![Mobile agent created tabs](./docs/screenshots/After_agent_created_call.png)
+
+
 
 ## Demo
 
-- **Live demo:** coming soon
-- **Screen recording:** coming soon
+- **Live demo:** [claude-console-mobile-responsive-audit on Vercel](https://claude-console-mobile-responsive-au.vercel.app) — use a **phone or narrow browser window** to see the mobile-focused layout (the case study target).
+- **Screen recording:** [Claude prototype (Google Drive)](https://drive.google.com/file/d/1telDnDFBBzQRcaf-TwpcQVnGii0Rw-rJ/view?usp=sharing)
 
 ## Disclaimer
 
