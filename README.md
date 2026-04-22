@@ -57,12 +57,48 @@ This prototype addresses that by separating the mobile experience into focused p
 | **Agent created** | Shows success state, agent description, API call snippet, config/code preview, and preview placeholder. Mobile uses Call / Config / Preview tabs with a sticky Next: Configure environment action. |
 | **Configure environment** | Shows the empty environment state, Configure environment CTA, Back action, and disabled Continue state. The prototype stops here while the stepper highlights step 2. |
 
-## Key Files
+## Key files
 
-```txt
-src/pages/Quickstart.tsx
-src/components/AppShell.tsx
-src/components/Sidebar.tsx
-src/components/TopBar.tsx
-src/components/MobileDrawer.tsx
-src/data/navItems.ts
+| Path | Role |
+|------|------|
+| `src/pages/Quickstart.tsx` | Quickstart flow, breakpoint branching, stepper, template and agent states |
+| `src/components/AppShell.tsx` | Page chrome: sidebar column, main column, mobile drawer |
+| `src/components/Sidebar.tsx` | Desktop sidebar (collapse / expand) |
+| `src/components/TopBar.tsx` | Mobile header and menu trigger |
+| `src/components/MobileDrawer.tsx` | Overlay navigation (`@radix-ui/react-dialog`) |
+| `src/data/navItems.ts` | Single nav entry (Quickstart) |
+
+## Tech stack
+
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Radix UI (Dialog)
+- lucide-react
+
+## Running locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Screenshots
+
+Coming soon.
+
+## Demo
+
+- **Live demo:** coming soon
+- **Screen recording:** coming soon
+
+## Disclaimer
+
+This is an independent, unofficial case study. It is not affiliated with Anthropic and is not intended to reproduce Claude Console exactly. The focus is on frontend interaction design, responsive layout behavior, and mobile workflow adaptation.
