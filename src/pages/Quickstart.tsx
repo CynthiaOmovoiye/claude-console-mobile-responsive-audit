@@ -14,6 +14,7 @@ import {
   Play,
   RotateCcw,
   Search,
+  Smartphone,
   Workflow,
   ArrowLeft
 } from 'lucide-react'
@@ -167,6 +168,33 @@ function getAgentApiSnippet(t: Template, lang: ApiLanguage): string {
     case 'typescript':
       return typescriptAgentSnippet(t)
   }
+}
+
+function QuickstartMobileViewportBanner() {
+  return (
+    <div
+      role="note"
+      className="mx-auto mb-6 w-full max-w-[1180px] shrink-0 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm text-[var(--text)]"
+    >
+      <div className="flex items-start gap-3">
+        <Smartphone className="mt-0.5 size-5 shrink-0 text-amber-400" strokeWidth={2} aria-hidden />
+        <p className="m-0 min-w-0 leading-relaxed">
+          <span className="font-medium text-[var(--text-h)]">View in a mobile-sized viewport.</span>{' '}
+          This Quickstart demonstrates the narrow-screen layout. Resize the window under 768px wide or use your
+          browser&apos;s responsive / device mode so you see the same mobile-focused UI.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function withDesktopMobileHint(isDesktop: boolean, node: ReactNode) {
+  return (
+    <>
+      {isDesktop ? <QuickstartMobileViewportBanner /> : null}
+      {node}
+    </>
+  )
 }
 
 function DesktopStepper({ activeIndex }: { activeIndex: number }) {
@@ -802,7 +830,8 @@ export function Quickstart() {
 
   /* ——— Configure environment (mobile + desktop) ——— */
   if (flowStep === 1) {
-    return (
+    return withDesktopMobileHint(
+      isDesktop,
       <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-8 pb-16">
         {isDesktop ? (
           <DesktopQuickstartHeader
@@ -831,7 +860,7 @@ export function Quickstart() {
           </button>
         </div>
        
-      </div>
+      </div>,
     )
   }
 
@@ -1023,7 +1052,8 @@ export function Quickstart() {
   /* ——— Desktop ——— */
   if (agentCreated) {
     const t = agentSummary
-    return (
+    return withDesktopMobileHint(
+      isDesktop,
       <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-8 pb-16">
         <DesktopQuickstartHeader
           stepper={<DesktopStepper activeIndex={0} />}
@@ -1073,13 +1103,14 @@ export function Quickstart() {
             )}
           </section>
         </div>
-      </div>
+      </div>,
     )
   }
 
   if (selectedTemplate) {
     const t = selectedTemplate
-    return (
+    return withDesktopMobileHint(
+      isDesktop,
       <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-8 pb-16">
         <DesktopQuickstartHeader
           stepper={<DesktopStepper activeIndex={stepperIndex} />}
@@ -1125,11 +1156,12 @@ export function Quickstart() {
             />
           </section>
         </div>
-      </div>
+      </div>,
     )
   }
 
-  return (
+  return withDesktopMobileHint(
+    isDesktop,
     <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-10 pb-16">
       <DesktopQuickstartHeader
         stepper={<DesktopStepper activeIndex={stepperIndex} />}
@@ -1177,6 +1209,6 @@ export function Quickstart() {
           ) : null}
         </section>
       </div>
-    </div>
+    </div>,
   )
 }
