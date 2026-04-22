@@ -1,16 +1,14 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 import { X } from 'lucide-react'
-import { navItems, type PageId } from '../data/navItems'
+import { navItems } from '../data/navItems'
 
 type MobileDrawerProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
-  activePage: PageId
-  onNavigate: (id: PageId) => void
 }
 
-export function MobileDrawer({ open, onOpenChange, activePage, onNavigate }: MobileDrawerProps) {
+export function MobileDrawer({ open, onOpenChange }: MobileDrawerProps) {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
@@ -30,28 +28,21 @@ export function MobileDrawer({ open, onOpenChange, activePage, onNavigate }: Mob
           </div>
           <Dialog.Description className="sr-only">Navigate between console sections.</Dialog.Description>
           <nav className="flex flex-col gap-1" aria-label="Primary mobile">
-            {navItems.map(({ id, label, icon: Icon }) => {
-              const active = id === activePage
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => {
-                    onNavigate(id)
-                    onOpenChange(false)
-                  }}
-                  className={clsx(
-                    'flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-colors',
-                    active
-                      ? 'bg-[var(--nav-active)] text-[var(--text-h)]'
-                      : 'text-[var(--text)] hover:bg-[var(--surface)] hover:text-[var(--text-h)]',
-                  )}
-                >
-                  <Icon className="size-4 shrink-0" aria-hidden />
-                  {label}
-                </button>
-              )
-            })}
+            {navItems.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                type="button"
+                aria-current="page"
+                onClick={() => onOpenChange(false)}
+                className={clsx(
+                  'flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-colors',
+                  'bg-[var(--nav-active)] text-[var(--text-h)]',
+                )}
+              >
+                <Icon className="size-4 shrink-0" aria-hidden />
+                {label}
+              </button>
+            ))}
           </nav>
         </Dialog.Content>
       </Dialog.Portal>

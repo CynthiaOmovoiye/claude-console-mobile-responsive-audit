@@ -192,11 +192,11 @@ function DesktopStepper({ activeIndex }: { activeIndex: number }) {
                 className={clsx(
                   'flex size-5 shrink-0 items-center justify-center rounded-full text-xs font-semibold tabular-nums transition-colors text-[var(--text-dim)]',
                   active && 'border border-[var(--text-h)] text-[var(--text-h)]',
-                  done && 'border border-[var(--text-h)] bg-[var(--surface)] text-[var(--text-h)]',
+                  done && 'border border-[var(--text-h)] bg-[var(--text-h)] text-[var(--bg)]',
                   pending && 'border border-[#525252] bg-[var(--bg)] text-[var(--text-dim)]',
                 )}
               >
-                {done ? <Check className="size-4 text-emerald-500" strokeWidth={2.5} aria-hidden /> : index + 1}
+                {done ? <Check className="size-4 text-dark" strokeWidth={2.5} aria-hidden /> : index + 1}
               </div>
               <span
                 className={clsx(
@@ -222,13 +222,16 @@ function MobileCompactStepper({ activeIndex }: { activeIndex: number }) {
         Step {Math.min(activeIndex + 1, 4)} of 4 · {STEPS[activeIndex] ?? STEPS[0]}
       </p>
       <div className="flex gap-1.5" role="list" aria-label="Progress">
-        {STEPS.map((_, i) => (
+      {STEPS.map((label, index) => {
+        const done = index < activeIndex
+        const active = index === activeIndex
+        return(
           <div
-            key={STEPS[i]}
-            role="listitem"
-            className={clsx('h-1 flex-1 rounded-full transition-colors', i <= activeIndex ? 'bg-[var(--text-h)]' : 'bg-[var(--border)]')}
-          />
-        ))}
+          key={label}
+          role="listitem"
+          className={clsx('h-1 flex-1 rounded-full transition-colors', done ? 'bg-[var(--button-bg)]' : active ? 'bg-[var(--text-h)]' : 'bg-[var(--border)]')}
+        />)
+        })}
       </div>
     </div>
   )
@@ -770,19 +773,15 @@ export function Quickstart() {
     setAgentPreviewTab('config')
   }
 
-  // const goConfigure = () => {
-  //   setFlowStep(1)
-  //   setAgentCreated(false)
-  //   setSelectedTemplate(null)
-  //   setWorkspaceMainTab('preview')
-  //   setMobileAgentTab('call')
-  // }
-
-  const configureBack = () => {
-    setFlowStep(0)
-    setAgentCreated(true)
-    setAgentPreviewTab('config')
+  const goConfigure = () => {
+    setFlowStep(1)
+    setAgentCreated(false)
+    setSelectedTemplate(null)
+    setWorkspaceMainTab('preview')
+    setMobileAgentTab('call')
   }
+
+
 
   const startOver = () => {
     setAgentCreated(false)
@@ -804,7 +803,7 @@ export function Quickstart() {
   /* ——— Configure environment (mobile + desktop) ——— */
   if (flowStep === 1) {
     return (
-      <div className="mx-auto flex min-h-0 w-full max-w-lg flex-1 flex-col md:max-w-xl">
+      <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-8 pb-16">
         {isDesktop ? (
           <DesktopQuickstartHeader
             stepper={<DesktopStepper activeIndex={1} />}
@@ -831,22 +830,7 @@ export function Quickstart() {
             + Configure environment
           </button>
         </div>
-        <div className="mt-auto flex gap-2 pt-8 md:justify-end">
-          <button
-            type="button"
-            onClick={configureBack}
-            className="flex-1 rounded-lg border border-[var(--border)] py-3 text-sm font-medium text-[var(--text-h)] hover:bg-[var(--surface)] md:flex-none md:px-6"
-          >
-            Back
-          </button>
-          <button
-            type="button"
-            disabled
-            className="flex-1 cursor-not-allowed rounded-lg bg-[var(--border)] py-3 text-sm font-medium text-[var(--text-dim)] md:flex-none md:px-6"
-          >
-            Continue
-          </button>
-        </div>
+       
       </div>
     )
   }
@@ -913,7 +897,7 @@ export function Quickstart() {
           <StickyMobileActions>
             <button
               type="button"
-              // onClick={goConfigure}
+              onClick={goConfigure}
               className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--text-h)] py-3.5 text-sm font-medium text-[var(--bg)] hover:opacity-95"
             >
               Next: Configure environment
@@ -1059,7 +1043,7 @@ export function Quickstart() {
             <ApiAgentCallCard template={t} language={apiCallLanguage} onLanguageChange={setApiCallLanguage} />
             <button
               type="button"
-              // onClick={goConfigure}
+              onClick={goConfigure}
               className="inline-flex w-fit items-center gap-2 rounded-lg bg-[var(--text-h)] px-5 py-2.5 text-sm font-medium text-[var(--bg)] hover:opacity-95"
             >
               Next: Configure environment

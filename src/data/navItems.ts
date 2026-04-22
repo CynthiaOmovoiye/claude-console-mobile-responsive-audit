@@ -1,7 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
-import { BarChart3, Bot, FolderOpen, LayoutDashboard } from 'lucide-react'
+import { Bot } from 'lucide-react'
 
-export type PageId = 'quickstart' | 'workbench' | 'files' | 'analytics'
+export type PageId = 'quickstart'
 
 export type NavItem = {
   id: PageId
@@ -9,9 +9,4 @@ export type NavItem = {
   icon: LucideIcon
 }
 
-export const navItems: NavItem[] = [
-  { id: 'quickstart', label: 'Quickstart', icon: Bot },
-  { id: 'workbench', label: 'Workbench', icon: LayoutDashboard },
-  { id: 'files', label: 'Files', icon: FolderOpen },
-  { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-]
+export const navItems: NavItem[] = [{ id: 'quickstart', label: 'Quickstart', icon: Bot }]

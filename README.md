@@ -1,37 +1,68 @@
-# Claude Console Mobile Responsive Layout Audit
+# Claude Console Quickstart Mobile UX Audit
 
-This is a small frontend audit and responsive layout prototype based on a mobile web issue observed in Claude Console.
+An unofficial frontend interaction prototype exploring how a dense, step-based console workflow can adapt to mobile viewports without squeezing the main workspace beside navigation or turning the page into one long stacked scroll.
 
-The goal is not to redesign Claude Console, but to demonstrate a possible layout direction for preventing content compression across the shared console shell on mobile screens.
+This project focuses on the Quickstart flow inside a small console-style shell. It is not a pixel-perfect recreation of Claude Console. It uses a similar dark, console-inspired visual direction to keep the context recognizable, while the layout and interaction decisions are intentionally focused on responsive behavior and mobile information architecture.
 
-## Problem framing
+## Project Goal
 
-The sidebar is collapsible, but expanding it on mobile appears to affect the layout flow and squeeze the active screen. Even when collapsed, some console screens still preserve desktop-style split layouts that make the main content difficult to read on narrow viewports.
+The goal of this prototype is to demonstrate a mobile-first approach to a multi-step setup flow.
 
-## What this prototype demonstrates
+On desktop, a console interface can support multiple visible surfaces at once: sidebar navigation, prompt area, template browser, code preview, and setup controls.
 
-- Desktop sidebar layout (including collapse to an icon rail)
-- Mobile drawer navigation (overlay, not flex-sibling)
-- Full-width mobile main content
-- **Quickstart** as a hero flow: desktop multi-panel layout vs mobile **Focused Mobile Workspace** (see below)
-- Responsive cards, lists, and dashboard blocks on other pages
+On mobile, preserving those panels side-by-side can compress the active screen and make the experience difficult to use. This prototype explores a different approach:
 
-## Mobile UX: Focused Mobile Workspace
+- navigation becomes an overlay drawer
+- the active screen keeps full width
+- Quickstart becomes a focused step flow
+- template/code views use tabs instead of side-by-side panels
+- primary actions stay reachable through sticky controls
+- long code content scrolls inside a confined region instead of stretching the entire page
 
-The desktop Quickstart experience shows several surfaces at once because there is enough horizontal space. On narrow viewports, mirroring that as one long vertical stack makes the flow hard to follow and pushes primary actions below excessive scrolling.
+## Why Only Quickstart?
 
-This prototype treats **mobile Quickstart** differently: it preserves the **same user journey** while changing the **layout model**. Navigation stays in an overlay drawer; the Quickstart flow becomes a **focused workspace**—one primary task surface at a time—with a compact step indicator, **Describe / Templates** segmentation instead of side-by-side columns, **full-screen template detail** with YAML/JSON tabs and **scroll confined to the code area**, **Summary / Config** tabs after agent creation, and **sticky bottom actions** so “Use this template”, “Next: Configure environment”, and similar controls stay reachable.
+This case study intentionally focuses on the Quickstart workflow because it already contains many of the hardest responsive frontend challenges:
 
-**Implementation reference:** `src/pages/Quickstart.tsx` (branching on `useMediaQuery('(min-width: 768px)')` for mobile vs desktop).
+- shared console shell
+- sidebar and mobile navigation behavior
+- multi-step setup framing
+- template discovery
+- template detail view
+- YAML / JSON code preview
+- copy actions
+- success state
+- empty follow-on state
+- sticky mobile actions
+- mobile information architecture
 
-## Scripts
+The prototype does not include Workbench, Files, Analytics, or a real backend/API. The scope is intentionally narrow so the Quickstart interaction model can be explored in more depth.
 
-```bash
-npm install
-npm run dev
-npm run build
-```
+## Problem Framing
 
-## Screenshots
+On narrow screens, a persistent sidebar or expanded menu can reduce the usable width of the active workspace. Even when the sidebar is collapsed into a narrow rail, console pages that rely on desktop split layouts can still become difficult to read or interact with.
 
-Coming up
+The core issue is not only navigation. It is also how dense desktop workflows adapt on mobile.
+
+This prototype addresses that by separating the mobile experience into focused panels rather than stacking every desktop section vertically.
+
+## Implemented Prototype
+
+| Area | Behavior |
+|---|---|
+| **Shell** | Desktop uses a collapsible sidebar and full main column. Mobile uses a top bar, full-width main content, and an overlay drawer built with Radix Dialog. The drawer does not sit beside or squeeze the active screen. |
+| **Breakpoint** | `useMediaQuery('(min-width: 768px)')` in `Quickstart.tsx` switches between desktop and mobile layout models. |
+| **Stepper** | Four setup phases are represented: Create agent → Configure environment → Start session → Integrate. Start session and Integrate are shown as future steps but are not built as separate screens. |
+| **Create agent — browse** | Includes template search, template cards, and empty-search feedback. Mobile uses a Describe/Templates segmented view instead of side-by-side columns. Desktop uses a split prompt + template browser layout. |
+| **Create agent — template detail** | Includes title, description, YAML/JSON toggle, code preview, copy action, and Use this template action. Mobile presents this as a focused template workspace with sticky bottom action. |
+| **Agent created** | Shows success state, agent description, API call snippet, config/code preview, and preview placeholder. Mobile uses Call / Config / Preview tabs with a sticky Next: Configure environment action. |
+| **Configure environment** | Shows the empty environment state, Configure environment CTA, Back action, and disabled Continue state. The prototype stops here while the stepper highlights step 2. |
+
+## Key Files
+
+```txt
+src/pages/Quickstart.tsx
+src/components/AppShell.tsx
+src/components/Sidebar.tsx
+src/components/TopBar.tsx
+src/components/MobileDrawer.tsx
+src/data/navItems.ts
