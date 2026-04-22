@@ -10,11 +10,19 @@ The sidebar is collapsible, but expanding it on mobile appears to affect the lay
 
 ## What this prototype demonstrates
 
-- Desktop sidebar layout
+- Desktop sidebar layout (including collapse to an icon rail)
 - Mobile drawer navigation (overlay, not flex-sibling)
 - Full-width mobile main content
-- Stacked mobile page sections
-- Responsive cards, lists, and dashboard blocks
+- **Quickstart** as a hero flow: desktop multi-panel layout vs mobile **Focused Mobile Workspace** (see below)
+- Responsive cards, lists, and dashboard blocks on other pages
+
+## Mobile UX: Focused Mobile Workspace
+
+The desktop Quickstart experience shows several surfaces at once because there is enough horizontal space. On narrow viewports, mirroring that as one long vertical stack makes the flow hard to follow and pushes primary actions below excessive scrolling.
+
+This prototype treats **mobile Quickstart** differently: it preserves the **same user journey** while changing the **layout model**. Navigation stays in an overlay drawer; the Quickstart flow becomes a **focused workspace**—one primary task surface at a time—with a compact step indicator, **Describe / Templates** segmentation instead of side-by-side columns, **full-screen template detail** with YAML/JSON tabs and **scroll confined to the code area**, **Summary / Config** tabs after agent creation, and **sticky bottom actions** so “Use this template”, “Next: Configure environment”, and similar controls stay reachable.
+
+**Implementation reference:** `src/pages/Quickstart.tsx` (branching on `useMediaQuery('(min-width: 768px)')` for mobile vs desktop).
 
 ## Scripts
 

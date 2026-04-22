@@ -1,25 +1,36 @@
 @import "tailwindcss";
 
+/* Claude Console–style dark shell (prototype) */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --text: #a3a3a3;
+  --text-h: #fcf4f1;
+  --text-dim: #97958c;
+  --bg: #1F1F1E;
+  --sidebar-bg: #171716;
+  --bg-dim: #1f1f1e;
+  --surface: #0A0A0A;
+  --surface-raised: #2c2c2a;
+  --border: #62625f;
+  --code-bg: #111111;
+  --nav-active: #0A0A0A;
+  --accent: #3b82f6;
+  --accent-bg: rgba(59, 130, 246, 0.14);
+  --accent-border: rgba(59, 130, 246, 0.45);
+  --social-bg: rgba(20, 20, 20, 0.8);
+  --shadow: rgba(0, 0, 0, 0.45) 0 12px 24px -8px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --button-bg: #bb684c;
+  --button-bg-hover: #D97757;
+  --button-disabled: #794634;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --console: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+
+  font: 16px/150% var(--sans);
+  letter-spacing: 0.01em;
+  color-scheme: dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -28,28 +39,12 @@
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+.font-console {
+  font-family: var(--console);
 }
 
 #root {
@@ -76,40 +71,55 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
+  font-size: 2.25rem;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 1.25rem 0;
   @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+    font-size: 1.75rem;
+    margin: 1rem 0;
   }
 }
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 1.125rem;
   }
 }
-p {
+/* p {
   margin: 0;
-}
+} */
 
-code,
 .counter {
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
-  color: var(--text-h);
+  color: #ce9178;
 }
 
-code {
+/* Inline code only — blocks use their own IDE-style colors in components */
+:not(pre) > code {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: #ce9178;
   font-size: 15px;
   line-height: 135%;
   padding: 4px 8px;
-  background: var(--code-bg);
+  background: transparent;
+}
+
+pre code {
+  display: block;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border-radius: 0;
 }
 
 /* Mobile drawer: Radix Presence waits for named CSS animations on exit */

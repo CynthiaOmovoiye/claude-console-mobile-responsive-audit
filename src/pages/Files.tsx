@@ -10,7 +10,7 @@ const rows = [
 export function Files() {
   return (
     <div className="mx-auto w-full max-w-6xl space-y-6">
-      <div className="hidden overflow-x-auto rounded-lg border border-[var(--border)] md:block">
+      <div className="hidden overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--surface)] md:block">
         <table className="w-full min-w-[520px] border-collapse text-left text-sm">
           <thead className="border-b border-[var(--border)] bg-[var(--code-bg)] text-[var(--text)]">
             <tr>

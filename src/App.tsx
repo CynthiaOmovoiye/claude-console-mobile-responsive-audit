@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <AppShell activePage={activePage} onNavigate={setActivePage}>
-      {renderPage(activePage)}
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">{renderPage(activePage)}</div>
     </AppShell>
   )
 }

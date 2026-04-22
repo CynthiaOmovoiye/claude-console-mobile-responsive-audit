@@ -8,7 +8,7 @@ export function Analytics() {
         <MetricCard label="Tokens (7d)" value="3.1M" hint="Includes retries and tool calls." />
         <MetricCard label="Error rate" value="0.4%" hint="5xx and client timeouts combined." />
       </div>
-      <section className="rounded-lg border border-[var(--border)] bg-[var(--bg)] p-4 shadow-sm">
+      <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm">
         <h2 className="text-lg font-medium text-[var(--text-h)]">Usage trend</h2>
         <p className="mt-1 text-sm text-[var(--text)]">Placeholder chart block. Cards stack on mobile; chart stays full width.</p>
         <div
