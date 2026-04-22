@@ -92,38 +92,37 @@ npm run build
 
 ## Screenshots
 
+Images use HTML `width` so they stay a comfortable size on GitHub (tweak the numbers if you want larger or smaller).
 
 ### 1. Before — Quickstart split (Create agent)
 
 *Desktop: prompt / “describe” column and **Browse templates** + search + cards in one view.*
 
-![Desktop Quickstart split layout](./docs/screenshots/Before_Sidebar_collapsed.png)
+<img src="./docs/screenshots/Before_Sidebar_collapsed.png" alt="Desktop Quickstart split layout" width="720" />
 
 ### 2. Mobile — overlay navigation drawer
 
 *Mobile: **Menu** opened; drawer overlays content (full-width main column preserved behind it).*
 
-![Mobile navigation drawer open](./docs/screenshots/After_agent_sidebar_drawer.png)
+<img src="./docs/screenshots/After_agent_sidebar_drawer.png" alt="Mobile navigation drawer open" width="390" />
 
 ### 3. Mobile — Describe / Templates segments
 
 *Mobile: **Create agent** step with **Describe** vs **Templates** segmentation (not side-by-side columns).*
 
-![Mobile Describe and Templates segments](./docs/screenshots/After_templates.png)
+<img src="./docs/screenshots/After_templates.png" alt="Mobile Describe and Templates segments" width="390" />
 
 ### 4. Mobile — template detail and code preview
 
 *Mobile: template title/description, **Describe / Preview** (or code) area, YAML/JSON preview, **Use this template** sticky action if visible.*
 
-![Mobile template detail and code preview](./docs/screenshots/After_template_details.png)
+<img src="./docs/screenshots/After_template_details.png" alt="Mobile template detail and code preview" width="390" />
 
 ### 5. Mobile — agent created (Call / Config / Preview)
 
 *Mobile: **Agent created** success, description, and **Call / Config / Preview** tabs (API snippet or config visible).*
 
-![Mobile agent created tabs](./docs/screenshots/After_agent_created_call.png)
-
-
+<img src="./docs/screenshots/After_agent_created_call.png" alt="Mobile agent created tabs" width="390" />
 
 ## Demo
 
